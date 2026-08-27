@@ -70,9 +70,9 @@ create index if not exists incidents_venue_idx on public.incidents (venue_id);
 create index if not exists incidents_status_idx on public.incidents (status);
 
 -- ---------------------------------------------------------------------------
--- Row Level Security — any authenticated operator can read everything.
--- Write access isn't needed yet (dashboard is read-only); add scoped
--- insert/update policies when the Staff/Venues/Shifts/Incidents pages land.
+-- Row Level Security — any authenticated operator can read and write
+-- everything. There's no per-row ownership model (single-tenant app for
+-- ABC Security Ltd), so policies only distinguish authenticated vs anon.
 -- ---------------------------------------------------------------------------
 alter table public.venues    enable row level security;
 alter table public.staff     enable row level security;
@@ -91,8 +91,26 @@ create policy "authenticated can update venues" on public.venues
 create policy "authenticated can read staff" on public.staff
   for select to authenticated using (true);
 
+create policy "authenticated can insert staff" on public.staff
+  for insert to authenticated with check (true);
+
+create policy "authenticated can update staff" on public.staff
+  for update to authenticated using (true) with check (true);
+
 create policy "authenticated can read shifts" on public.shifts
   for select to authenticated using (true);
 
+create policy "authenticated can insert shifts" on public.shifts
+  for insert to authenticated with check (true);
+
+create policy "authenticated can update shifts" on public.shifts
+  for update to authenticated using (true) with check (true);
+
 create policy "authenticated can read incidents" on public.incidents
   for select to authenticated using (true);
+
+create policy "authenticated can insert incidents" on public.incidents
+  for insert to authenticated with check (true);
+
+create policy "authenticated can update incidents" on public.incidents
+  for update to authenticated using (true) with check (true);

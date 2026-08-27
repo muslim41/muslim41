@@ -4,11 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const NAV_ITEMS = [
-  { label: "Dashboard", href: "/dashboard", enabled: true },
-  { label: "Venues", href: "/venues", enabled: true },
-  { label: "Staff", href: "#", enabled: false },
-  { label: "Shifts", href: "#", enabled: false },
-  { label: "Incidents", href: "#", enabled: false },
+  { label: "Dashboard", href: "/dashboard" },
+  { label: "Venues", href: "/venues" },
+  { label: "Staff", href: "/staff" },
+  { label: "Shifts", href: "/shifts" },
+  { label: "Incidents", href: "/incidents" },
 ];
 
 export function Sidebar({ userEmail }: { userEmail: string }) {
@@ -43,22 +43,7 @@ export function Sidebar({ userEmail }: { userEmail: string }) {
 
       <nav className="flex-1 space-y-0.5 px-3 py-4">
         {NAV_ITEMS.map((item) => {
-          const isActive = item.enabled && pathname.startsWith(item.href);
-
-          if (!item.enabled) {
-            return (
-              <span
-                key={item.label}
-                aria-disabled
-                className="flex items-center justify-between rounded px-3 py-2 text-sm text-slate-600"
-              >
-                {item.label}
-                <span className="rounded-sm bg-slate-800 px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-slate-500">
-                  Soon
-                </span>
-              </span>
-            );
-          }
+          const isActive = pathname.startsWith(item.href);
 
           return (
             <Link

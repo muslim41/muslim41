@@ -1,8 +1,8 @@
 # Security Operations Dashboard
 
 Web app for security companies to manage venues, staff, shifts, and
-incidents. This MVP milestone covers: login → dashboard loads → fake
-"ABC Security Ltd" data appears → understaffed venues show a red warning.
+incidents. Login → dashboard overview (understaffed venues flagged in
+red) → full CRUD on Venues, Staff, Shifts, and Incidents.
 
 Stack: Next.js (App Router) + TypeScript, Tailwind CSS, Supabase
 (Postgres + Auth), deployed on Vercel.
@@ -30,7 +30,8 @@ Fill in the three values from step 1.
 
 Open the Supabase SQL editor and run `supabase/schema.sql`. It creates the
 `venues`, `staff`, `shifts`, and `incidents` tables with RLS policies that
-let any authenticated user read all four.
+let any authenticated user read and write all four (single-tenant app,
+no per-row ownership).
 
 ### 4. Seed fake data
 
@@ -65,11 +66,17 @@ to `/login`, then to `/dashboard` after signing in.
 - `app/login` — email/password sign-in page
 - `app/(protected)` — route group sharing the sidebar shell + auth guard
   - `dashboard` — operations overview page
-  - `venues` — venue list, add/edit forms, and activate/deactivate
-- `components` — `Sidebar`, `StatCard`, `AlertCard`, `VenueForm`
+  - `venues` — venue list, add/edit forms, activate/deactivate
+  - `staff` — staff roster, add/edit forms, activate/deactivate, SIA
+    licence expiry badges
+  - `shifts` — shift list (venue/staff/time/status), add/edit forms
+  - `incidents` — incident list, add/edit forms, severity + status
+- `components` — `Sidebar`, `StatCard`, `AlertCard`, `VenueForm`,
+  `StaffForm`, `ShiftForm`, `IncidentForm`
 - `lib/supabase` — browser/server/proxy Supabase clients
 - `lib/dashboard-data.ts` — dashboard query + staffing calculations
-- `lib/venues.ts` — venue record types + form parsing
+- `lib/venues.ts`, `lib/staff.ts`, `lib/shifts.ts`, `lib/incidents.ts` —
+  record types + form parsing for each entity
 - `supabase/schema.sql` — table definitions and RLS policies
 - `scripts/seed.ts` — fake data generator (`npm run seed`)
 
