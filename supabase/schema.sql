@@ -82,6 +82,12 @@ alter table public.incidents enable row level security;
 create policy "authenticated can read venues" on public.venues
   for select to authenticated using (true);
 
+create policy "authenticated can insert venues" on public.venues
+  for insert to authenticated with check (true);
+
+create policy "authenticated can update venues" on public.venues
+  for update to authenticated using (true) with check (true);
+
 create policy "authenticated can read staff" on public.staff
   for select to authenticated using (true);
 

@@ -63,10 +63,13 @@ to `/login`, then to `/dashboard` after signing in.
 ## Project structure
 
 - `app/login` — email/password sign-in page
-- `app/dashboard` — protected dashboard (sidebar shell + overview page)
-- `components` — `StatCard` and `AlertCard` used by the dashboard
-- `lib/supabase` — browser/server/middleware Supabase clients
+- `app/(protected)` — route group sharing the sidebar shell + auth guard
+  - `dashboard` — operations overview page
+  - `venues` — venue list, add/edit forms, and activate/deactivate
+- `components` — `Sidebar`, `StatCard`, `AlertCard`, `VenueForm`
+- `lib/supabase` — browser/server/proxy Supabase clients
 - `lib/dashboard-data.ts` — dashboard query + staffing calculations
+- `lib/venues.ts` — venue record types + form parsing
 - `supabase/schema.sql` — table definitions and RLS policies
 - `scripts/seed.ts` — fake data generator (`npm run seed`)
 
