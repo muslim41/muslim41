@@ -15,8 +15,8 @@ Create a project at [supabase.com](https://supabase.com), then grab from
 **Project Settings → API**:
 
 - Project URL
-- `anon` public key
-- `service_role` secret key (seed script only — never expose to the browser)
+- `publishable` key
+- `secret` key (seed script only — never expose to the browser)
 
 ### 2. Environment variables
 
@@ -71,6 +71,6 @@ to `/login`, then to `/dashboard` after signing in.
 
 ## Deploying on Vercel
 
-Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` as
+Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` as
 environment variables in the Vercel project settings, then deploy as usual.
-`SUPABASE_SERVICE_ROLE_KEY` is only needed locally to run the seed script.
+`SUPABASE_SECRET_KEY` is only needed locally to run the seed script.

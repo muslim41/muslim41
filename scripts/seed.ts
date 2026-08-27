@@ -3,7 +3,7 @@
  * 12 venues, ~150 staff, today's shifts (with a few absences), a handful
  * of incidents, and a few venues left deliberately understaffed.
  *
- * Requires SUPABASE_SERVICE_ROLE_KEY (bypasses RLS) — never expose this key
+ * Requires SUPABASE_SECRET_KEY (bypasses RLS) — never expose this key
  * to the browser. Run with: npm run seed
  */
 import "dotenv/config";
@@ -11,16 +11,16 @@ import { createClient } from "@supabase/supabase-js";
 import { fakerEN_GB as faker } from "@faker-js/faker";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const SECRET_KEY = process.env.SUPABASE_SECRET_KEY;
 
-if (!SUPABASE_URL || !SERVICE_ROLE_KEY) {
+if (!SUPABASE_URL || !SECRET_KEY) {
   console.error(
-    "Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY in .env.local",
+    "Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SECRET_KEY in .env.local",
   );
   process.exit(1);
 }
 
-const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY, {
+const supabase = createClient(SUPABASE_URL, SECRET_KEY, {
   auth: { persistSession: false },
 });
 
