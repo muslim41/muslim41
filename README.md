@@ -62,10 +62,11 @@ to `/login`, then to `/dashboard` after signing in.
 
 ## Project structure
 
-- `src/app/login` — email/password sign-in page
-- `src/app/dashboard` — protected dashboard (sidebar shell + overview page)
-- `src/lib/supabase` — browser/server/middleware Supabase clients
-- `src/lib/dashboard-data.ts` — dashboard query + staffing calculations
+- `app/login` — email/password sign-in page
+- `app/dashboard` — protected dashboard (sidebar shell + overview page)
+- `components` — `StatCard` and `AlertCard` used by the dashboard
+- `lib/supabase` — browser/server/middleware Supabase clients
+- `lib/dashboard-data.ts` — dashboard query + staffing calculations
 - `supabase/schema.sql` — table definitions and RLS policies
 - `scripts/seed.ts` — fake data generator (`npm run seed`)
 
