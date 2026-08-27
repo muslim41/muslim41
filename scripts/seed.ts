@@ -6,9 +6,11 @@
  * Requires SUPABASE_SECRET_KEY (bypasses RLS) — never expose this key
  * to the browser. Run with: npm run seed
  */
-import "dotenv/config";
+import { config } from "dotenv";
 import { createClient } from "@supabase/supabase-js";
 import { fakerEN_GB as faker } from "@faker-js/faker";
+
+config({ path: ".env.local" });
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SECRET_KEY = process.env.SUPABASE_SECRET_KEY;
